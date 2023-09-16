@@ -32,19 +32,33 @@ app.debug = True
 def index():
     return render_template('index.html')
 
-# Rutas de otras paginas
+# Rutas para paginas de creacion
 @app.route('/create_register')
 def create_register():
     return render_template('create_register.html')
 
+@app.route('/create_deparment')
+def create_deparment():
+    return render_template('create_deparment.html')
+
+@app.route('/create_employee')
+def create_employee():
+    return render_template('create_employee.html')
+
+
+# Rutas para paginas de listado
 @app.route('/list_registers')
 def list_registers():
     return render_template('list_registers.html')
 
+
+# Rutas para paginas de eliminacion
 @app.route('/delete_register')
 def delete_register():
     return render_template('delete_register.html')
 
+
+# Rutas para paginas de actualizacion
 @app.route('/update_register')
 def update_register():
     return render_template('update_register.html')
