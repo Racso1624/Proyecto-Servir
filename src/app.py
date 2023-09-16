@@ -5,7 +5,7 @@ Prueba Técnica
 '''
 
 # Importar librerias necesarias
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for, redirect, flash, session
 import psycopg2 
 import psycopg2.extras
 from dotenv import load_dotenv
@@ -44,6 +44,14 @@ def create_deparment():
 @app.route('/create_employee')
 def create_employee():
     return render_template('create_employee.html')
+
+@app.route('/register_employee')
+def register_employee():
+    return redirect(url_for('create_employee.html'))
+
+@app.route('/register_department')
+def register_department():
+    return redirect(url_for('create_deparment.html'))
 
 
 # Rutas para paginas de listado
