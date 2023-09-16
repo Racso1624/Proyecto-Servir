@@ -32,5 +32,22 @@ app.debug = True
 def index():
     return render_template('index.html')
 
+# Rutas de otras paginas
+@app.route('/create_register')
+def create_register():
+    return render_template('create_register.html')
+
+@app.route('/list_registers')
+def list_registers():
+    return render_template('list_registers.html')
+
+@app.route('/delete_register')
+def delete_register():
+    return render_template('delete_register.html')
+
+@app.route('/update_register')
+def update_register():
+    return render_template('update_register.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

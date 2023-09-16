@@ -9,10 +9,10 @@
         <h1 class="font-weight-bold">Bienvenido al Sistema de Empleados</h1>
         <p class="h3 font-weight-bold"> Tiene las siguientes opciones:</p>
         <div class="container d-flex flex-column align-items-center">
-            <button class="btn btn-secondary mb-3">Listar todos los registros</button>
-            <button class="btn btn-secondary mb-3">Crear un nuevo registro</button>
-            <button class="btn btn-secondary mb-3">Actualizar un registro existente</button>
-            <button class="btn btn-secondary mb-3">Eliminar un registro</button>
+            <a class="btn btn-secondary mb-3" href="{{url_for('list_registers')}}">Listar todos los registros</a>
+            <a class="btn btn-secondary mb-3" href="{{url_for('create_register')}}">Crear un nuevo registro</a>
+            <a class="btn btn-secondary mb-3" href="{{url_for('update_register')}}">Actualizar un registro existente</a>
+            <a class="btn btn-secondary mb-3" href="{{url_for('delete_register')}}">Eliminar un registro</a>
         </div>
     </div>
 </body>
