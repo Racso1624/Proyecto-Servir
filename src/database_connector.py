@@ -31,16 +31,19 @@ class DatabaseConnector():
         return database_cursor.fetchone()
 
     def create_deparment_query(self, id, name, description):
+        
+        if(not self.get_deparment_code_query(id)):
+            database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-        database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            database_cursor.execute(
+                """
+                INSERT INTO departamento(id, nombre, descripcion) VALUES ('{0}', '{1}', '{2}');
+                """.format(id, name, description)
+            )
 
-        database_cursor.execute(
-            """
-            SELECT * FROM departamento WHERE id = '{0}'
-            """.format(id, name, description)
-        )
-
-        return
+            self.database_connection.commit()
+        else:
+            return "ERROR"
 
 
     def create_employee_query(self):
