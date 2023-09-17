@@ -24,32 +24,43 @@ def index():
 def create_register():
     return render_template('create_register.html')
 
-@app.route('/create_deparment', methods=['GET'])
-def create_deparment():
-    return render_template('create_deparment.html')
+@app.route('/create_department', methods=['GET'])
+def create_department():
+    return render_template('create_department.html')
 
-@app.route('/create_employee', methods=['POST'])
+@app.route('/create_employee', methods=['GET'])
 def create_employee():
     return render_template('create_employee.html')
 
-@app.route('/register_employee')
+@app.route('/register_employee', methods=['POST'])
 def register_employee():
+    employee_name = request.form['name']
+    employee_lastname = request.form['lastname']
+    employee_birthdate = request.form['dateOfBirth']
+    employee_department = request.form['department']
+    result = database.create_employee_query(employee_name, employee_lastname, employee_birthdate, employee_department)
+
+    if result == "ERROR":
+        flash(("Código de departamento no existe", 'danger'))
+    else:
+        flash(("Empleado registrado exitosamente", 'success'))
+
     return redirect(url_for('create_employee'))
 
 @app.route('/register_department', methods=['POST'])
 def register_department():
 
-    deparment_id = request.form['code']
-    deparment_name = request.form['name']
-    deparment_description = request.form['description']
-    result = database.create_deparment_query(deparment_id, deparment_name, deparment_description)
+    department_id = request.form['code']
+    department_name = request.form['name']
+    department_description = request.form['description']
+    result = database.create_department_query(department_id, department_name, department_description)
 
     if result == "ERROR":
         flash(("Código de departamento ya existe", 'danger'))
     else:
         flash(("Departamento registrado exitosamente", 'success'))
 
-    return redirect(url_for('create_deparment'))
+    return redirect(url_for('create_department'))
 
 
 # Rutas para paginas de listado
