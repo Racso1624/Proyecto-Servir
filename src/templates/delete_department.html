@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Eliminar Departamento</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+        <h1 class="font-weight-bold">Eliminación de Departamentos</h1>
+        <p class="h5 font-weight-bold">Ingresa la siguiente información:</p>
+        <div class="container d-flex flex-column align-items-center">
+
+            <form action="/register_department" method="post" autocomplete="off">
+
+                <div class="form-group">
+                    <label for="code" class="col-form-label">Codigo del Departamento a Eliminar</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="code" id="code" placeholder="Ingrese el codigo"
+                            required>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-start">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message, category in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+
+                <div class="container d-flex justify-content-center align-items-center">
+                    <input type="submit" value="Eliminar departamento" class="btn btn-primary" name="">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
