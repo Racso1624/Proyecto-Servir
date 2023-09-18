@@ -77,7 +77,7 @@ class DatabaseConnector():
     # Funcion para obtener los empleados que estan asociados a un departamento
     def employees_in_department(self, department_id):
 
-         # Se crea el cursor para realizar la consulta
+        # Se crea el cursor para realizar la consulta
         database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
         # Se ejecuta el query que se escribe dentro
@@ -89,7 +89,39 @@ class DatabaseConnector():
         )
 
         # Se retorna el resultado del query
-        return database_cursor.fetchone()
+        return database_cursor.fetchall()
+    
+    # Funcion para obtener todos los departamentos
+    def get_departments(self):
+
+        # Se crea el cursor para realizar la consulta
+        database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        # Se ejecuta el query que se escribe dentro
+        database_cursor.execute(
+            """
+            SELECT * FROM departamento;
+            """
+        )
+
+        # Se retorna el resultado del query
+        return database_cursor.fetchall()
+    
+    # Funcion para obtener todos los empleados
+    def get_employees(self):
+
+        # Se crea el cursor para realizar la consulta
+        database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        # Se ejecuta el query que se escribe dentro
+        database_cursor.execute(
+            """
+            SELECT * FROM empleado;
+            """
+        )
+
+        # Se retorna el resultado del query
+        return database_cursor.fetchall()
     
     # Funcion para crear un departamento
     def create_department_query(self, department, name, description):

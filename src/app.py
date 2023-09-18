@@ -91,6 +91,31 @@ def register_employee():
 def list_registers():
     return render_template('list_registers.html')
 
+# Metodo para cargar la pagina de listar departamento
+@app.route('/list_departments', methods=['GET'])
+def list_departments():
+    result = database.get_departments()
+
+    if(result):
+        message = None
+    else:
+        message = "No existen departamentos"
+
+    return render_template('list_departments.html', departments=result, message=message)
+
+# Metodo para cargar la pagina de listar empleados
+@app.route('/list_employees', methods=['GET'])
+def list_employees():
+
+    result = database.get_employees()
+
+    if(result):
+        message = None
+    else:
+        message = "No existen empleados"
+
+    return render_template('list_employees.html', employees=result, message=message)
+
 
 # Rutas para paginas de eliminacion
 @app.route('/delete_register')

@@ -11,8 +11,8 @@
         <h1 class="font-weight-bold">Listado de registros</h1>
         <p class="h3 font-weight-bold">Tiene las siguientes opciones:</p>
         <div class="container d-flex flex-column align-items-center">
-            <button class="btn btn-secondary mb-3">Listar departamentos</button>
-            <button class="btn btn-secondary mb-3">Listar empleados</button>
+            <a class="btn btn-secondary mb-3" href="{{url_for('list_departments')}}">Listar departamentos</a>
+            <a class="btn btn-secondary mb-3" href="{{url_for('list_employees')}}">Listar empleados</a>
         </div>
     </div>
 </body>
