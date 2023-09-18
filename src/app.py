@@ -192,5 +192,13 @@ def delete_register_employee():
 def update_register():
     return render_template('update_register.html')
 
+@app.route('/update_department')
+def update_department():
+    return render_template('update_department.html')
+
+@app.route('/update_employee')
+def update_employee():
+    return render_template('update_employee.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
