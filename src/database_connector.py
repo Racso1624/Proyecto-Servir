@@ -42,6 +42,22 @@ class DatabaseConnector():
         # Se retorna el resultado del query
         return database_cursor.fetchone()
     
+    # Funcion para consultar el codigo de un empleado
+    def get_employee_code_query(self, employee_code):
+
+        # Se crea el cursor para realizar la consulta
+        database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        # Se ejecuta el query que se escribe dentro
+        database_cursor.execute(
+            """
+            SELECT * FROM empleado WHERE id = '{0}';
+            """.format(employee_code)
+        )
+
+        # Se retorna el resultado del query
+        return database_cursor.fetchone()
+    
     # Funcion para obtener el numero de los empleados que existen en la base de datos 
     def get_number_of_employees_query(self):
 
@@ -108,5 +124,42 @@ class DatabaseConnector():
             # Se realiza el commit de la nueva informacion en la base de datos
             self.database_connection.commit()
         # Si el codigo ya fue utilizado se retorna error
+        else:
+            return "ERROR"
+    
+    # IMPORTANTE
+    # SE TIENEN QUE REVISAR SI EXISTEN EMPLEADOS ASOCIADOS AL DEPARTAMENTO
+    def delete_department_query(self, department_code):
+
+        # Si el codigo del departamento existe se realiza la eliminacion
+        if(self.get_department_code_query(department_code)):
+            # Se crea el cursor para realizar la consulta
+            database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+
+            # Se realiza el commit de la nueva informacion en la base de datos
+            self.database_connection.commit()
+        # Si el codigo ya fue utilizado se retorna error
+        else:
+            return "ERROR"
+    
+    # Funcion para eliminar el empleado
+    def delete_employee_query(self, employee_code):
+
+        # Si el codigo del empleado existe se elimina el empleado
+        if(self.get_employee_code_query(employee_code)):
+            # Se crea el cursor para realizar la consulta
+            database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+            # Se ejecuta el query que se escribe dentro
+            database_cursor.execute(
+                """
+                DELETE FROM empleado WHERE id = '{0}';
+                """.format(employee_code) # Se brindan los valores necesarios para el query
+            )
+
+            # Se realiza el commit de la nueva informacion en la base de datos
+            self.database_connection.commit()
+        # Si el codigo no existe se devuelve error
         else:
             return "ERROR"
