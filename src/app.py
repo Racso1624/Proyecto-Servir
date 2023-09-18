@@ -87,6 +87,7 @@ def register_employee():
 
 
 # Rutas para paginas de listado
+# Metodo para mostrar paginas de listado
 @app.route('/list_registers')
 def list_registers():
     return render_template('list_registers.html')
@@ -94,26 +95,32 @@ def list_registers():
 # Metodo para cargar la pagina de listar departamento
 @app.route('/list_departments', methods=['GET'])
 def list_departments():
+    # Se obtiene el resultado de la base de datos
     result = database.get_departments()
 
+    # Se comprueba que existan datos
     if(result):
         message = None
+    # Si no existen se manda el mensaje para imprimir
     else:
         message = "No existen departamentos"
 
+    # Se renderiza la pantalla con los resultados
     return render_template('list_departments.html', departments=result, message=message)
 
 # Metodo para cargar la pagina de listar empleados
 @app.route('/list_employees', methods=['GET'])
 def list_employees():
-
+    # Se obtiene el resultado de la base de datos
     result = database.get_employees()
-
+    # Se comprueba que existan datos
     if(result):
         message = None
+    # Si no existen se manda el mensaje para imprimir
     else:
         message = "No existen empleados"
-
+    
+    # Se renderiza la pantalla con los resultados
     return render_template('list_employees.html', employees=result, message=message)
 
 
