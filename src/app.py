@@ -97,6 +97,60 @@ def list_registers():
 def delete_register():
     return render_template('delete_register.html')
 
+# Metodo para cargar la pagina de eliminar departamento
+@app.route('/delete_department', methods=['GET'])
+def delete_department():
+    return render_template('delete_department.html')
+
+# Metodo para realizar la accion de eliminar departamento
+@app.route('/delete_register_department', methods=['POST'])
+def delete_register_department():
+
+    # Se obtienen los datos por parte del form
+    department_id = request.form['code']
+
+    # Se ingresan los datos al query y se recibe el resultado
+    result = database.delete_department_query(department_id)
+
+    # Si el resultado da error
+    if result == "ERROR":
+        # Se brinda un mensaje de error
+        flash(("Código de departamento ya existe", 'danger'))
+    # De lo contrario
+    else:
+        # Se brinda un mensaje correcto
+        flash(("Departamento eliminado exitosamente", 'success'))
+
+    # Se redirecciona a la pagina de creacion
+    return redirect(url_for('delete_department'))
+
+# Metodo para cargar la pagina de eliminar empleado
+@app.route('/delete_employee', methods=['GET'])
+def delete_employee():
+    return render_template('delete_employee.html')
+
+# Metodo para realizar la accion de eliminar empleado
+@app.route('/delete_register_employee', methods=['POST'])
+def delete_register_employee():
+
+    # Se obtienen los datos por parte del form
+    employee_id = request.form['code']
+
+    # Se ingresan los datos al query y se recibe el resultado
+    result = database.delete_employee_query(employee_id)
+
+    # Si el resultado da error
+    if result == "ERROR":
+        # Se brinda un mensaje de error
+        flash(("Código de departamento no existe", 'danger'))
+    # De lo contrario
+    else:
+        # Se brinda un mensaje correcto
+        flash(("Empleado eliminado exitosamente", 'success'))
+
+    # Se redirecciona a la pagina de creacion
+    return redirect(url_for('delete_employee'))
+
 
 # Rutas para paginas de actualizacion
 @app.route('/update_register')
