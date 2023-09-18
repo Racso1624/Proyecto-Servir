@@ -8,6 +8,7 @@ Prueba Técnica
 from flask import Flask, render_template, request, url_for, redirect, flash, session
 from database_connector import DatabaseConnector
 
+# Conectar la base de datos 
 database = DatabaseConnector()
 
 # Correr Flask para la pagina
@@ -20,47 +21,69 @@ def index():
     return render_template('index.html')
 
 # Rutas para paginas de creacion
+# Metodo para cargar la pagina de registro de informacion
 @app.route('/create_register')
 def create_register():
     return render_template('create_register.html')
 
+# Metodo para cargar la pagina de crear departamento
 @app.route('/create_department', methods=['GET'])
 def create_department():
     return render_template('create_department.html')
 
+# Metodo para realizar la accion de crear departamento
+@app.route('/register_department', methods=['POST'])
+def register_department():
+
+    # Se obtienen los datos por parte del form
+    department_id = request.form['code']
+    department_name = request.form['name']
+    department_description = request.form['description']
+
+    # Se ingresan los datos al query y se recibe el resultado
+    result = database.create_department_query(department_id, department_name, department_description)
+
+    # Si el resultado da error
+    if result == "ERROR":
+        # Se brinda un mensaje de error
+        flash(("Código de departamento ya existe", 'danger'))
+    # De lo contrario
+    else:
+        # Se brinda un mensaje correcto
+        flash(("Departamento registrado exitosamente", 'success'))
+
+    # Se redirecciona a la pagina de creacion
+    return redirect(url_for('create_department'))
+
+# Metodo para cargar la pagina de crear empleado
 @app.route('/create_employee', methods=['GET'])
 def create_employee():
     return render_template('create_employee.html')
 
+# Metodo para realizar la accion de registrar empleado
 @app.route('/register_employee', methods=['POST'])
 def register_employee():
+
+    # Se obtienen los datos por parte del form
     employee_name = request.form['name']
     employee_lastname = request.form['lastname']
     employee_birthdate = request.form['dateOfBirth']
     employee_department = request.form['department']
+
+    # Se ingresan los datos al query y se recibe el resultado
     result = database.create_employee_query(employee_name, employee_lastname, employee_birthdate, employee_department)
 
+    # Si el resultado da error
     if result == "ERROR":
+        # Se brinda un mensaje de error
         flash(("Código de departamento no existe", 'danger'))
+    # De lo contrario
     else:
+        # Se brinda un mensaje correcto
         flash(("Empleado registrado exitosamente", 'success'))
 
+    # Se redirecciona a la pagina de creacion
     return redirect(url_for('create_employee'))
-
-@app.route('/register_department', methods=['POST'])
-def register_department():
-
-    department_id = request.form['code']
-    department_name = request.form['name']
-    department_description = request.form['description']
-    result = database.create_department_query(department_id, department_name, department_description)
-
-    if result == "ERROR":
-        flash(("Código de departamento ya existe", 'danger'))
-    else:
-        flash(("Departamento registrado exitosamente", 'success'))
-
-    return redirect(url_for('create_department'))
 
 
 # Rutas para paginas de listado
