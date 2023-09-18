@@ -74,6 +74,23 @@ class DatabaseConnector():
         # Se retorna el resultado del query
         return database_cursor.fetchone()
     
+    # Funcion para obtener los empleados que estan asociados a un departamento
+    def employees_in_department(self, department_id):
+
+         # Se crea el cursor para realizar la consulta
+        database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        # Se ejecuta el query que se escribe dentro
+        database_cursor.execute(
+            """
+            SELECT * FROM empleado
+            WHERE id_departamento = '{0}';
+            """.format(department_id)
+        )
+
+        # Se retorna el resultado del query
+        return database_cursor.fetchone()
+    
     # Funcion para crear un departamento
     def create_department_query(self, department, name, description):
         
@@ -127,18 +144,29 @@ class DatabaseConnector():
         else:
             return "ERROR"
     
-    # IMPORTANTE
-    # SE TIENEN QUE REVISAR SI EXISTEN EMPLEADOS ASOCIADOS AL DEPARTAMENTO
+    # Funcion para eliminar el departamento
     def delete_department_query(self, department_code):
 
         # Si el codigo del departamento existe se realiza la eliminacion
         if(self.get_department_code_query(department_code)):
-            # Se crea el cursor para realizar la consulta
-            database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            # Si el departamento no tiene empleados se elimina
+            if(not self.employees_in_department(department_code)):
 
+                # Se crea el cursor para realizar la consulta
+                database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-            # Se realiza el commit de la nueva informacion en la base de datos
-            self.database_connection.commit()
+                # Se ejecuta el query que se escribe dentro
+                database_cursor.execute(
+                    """
+                    DELETE FROM departamento WHERE id = '{0}';
+                    """.format(department_code) # Se brindan los valores necesarios para el query
+                )
+
+                # Se realiza el commit de la nueva informacion en la base de datos
+                self.database_connection.commit()
+            # Se retorna el error
+            else:
+                return "TIENE EMPLEADOS"
         # Si el codigo ya fue utilizado se retorna error
         else:
             return "ERROR"

@@ -44,7 +44,7 @@ def register_department():
     result = database.create_department_query(department_id, department_name, department_description)
 
     # Si el resultado da error
-    if result == "ERROR":
+    if(result == "ERROR"):
         # Se brinda un mensaje de error
         flash(("Código de departamento ya existe", 'danger'))
     # De lo contrario
@@ -74,7 +74,7 @@ def register_employee():
     result = database.create_employee_query(employee_name, employee_lastname, employee_birthdate, employee_department)
 
     # Si el resultado da error
-    if result == "ERROR":
+    if(result == "ERROR"):
         # Se brinda un mensaje de error
         flash(("Código de departamento no existe", 'danger'))
     # De lo contrario
@@ -113,9 +113,12 @@ def delete_register_department():
     result = database.delete_department_query(department_id)
 
     # Si el resultado da error
-    if result == "ERROR":
+    if(result == "ERROR"):
         # Se brinda un mensaje de error
-        flash(("Código de departamento ya existe", 'danger'))
+        flash(("Código de departamento no existe", 'danger'))
+    # Si tiene empleados asociados
+    elif(result == "TIENE EMPLEADOS"):
+        flash(("Departamento tiene empleados asociados", 'danger'))
     # De lo contrario
     else:
         # Se brinda un mensaje correcto
@@ -142,7 +145,7 @@ def delete_register_employee():
     # Si el resultado da error
     if result == "ERROR":
         # Se brinda un mensaje de error
-        flash(("Código de departamento no existe", 'danger'))
+        flash(("Código de empleado no existe", 'danger'))
     # De lo contrario
     else:
         # Se brinda un mensaje correcto
