@@ -7,11 +7,13 @@
   
 Se debe de crear un archivo .env con las siguiente características de la conexión a la base de datos:
 
-`DATABASE = database-name`\
-`USER = database-user`\
-`PASSWORD = database-password`\
-`HOST = database-host`\
-`PORT = database-host`
+```
+DATABASE = database-name
+USER = database-user
+PASSWORD = database-password
+HOST = database-host
+PORT = database-host
+```
 
 El archivo .env se debe de guardar en src.
 
