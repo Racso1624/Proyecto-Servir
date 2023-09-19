@@ -52,15 +52,16 @@ Revisión de Asistencia:
 
 Pantalla en la que se realizará el listado de la asistencia marcada de cada uno de los empleados, utilizando el código personal de empleado para vincular y mostrar la información personal de asistencia.
 
-#### Procesos
+### Procesos
 
 Para la efectividad de la solución se pueden crear procesos en los cuáles los empleados o supervisores marcarán la asistencia diaria de cada uno de estos mediante el código del centro y del empleado, además de lograr brindar la información para conocer las horas trabajadas del empleado.
 
 Para brindar más información se puede realizar más pantallas que puedan brindar estadísticas de los empleados dependiendo de la necesidad que se tenga y la forma en la que la información sea necesaria para brindar resultados en las planificaciones mensuales.
 
-#### Consultas
+### Consultas
 
 Para una mejor resolución del problema se realizarán las siguientes consultas a las personas encargadas de llevar el proceso de la implementación de la asistencia y planificaciones mensuales:
 - ¿Cuáles son los datos principales que deben de obtener en la el manejo de la asistencia con los empleados?
 - ¿Qué estadísticas importantes pueden brindar datos certeros para la planificación mensual de los empleados?
 - ¿Es importante que se tenga una conexión directa entre el centro y el empleado?
+- ¿Cuáles podrían ser algunas características que pueden servir para implementar una mejor solución en la aplicación web? (Notificación de Asistencia, Planificación, etc.)
