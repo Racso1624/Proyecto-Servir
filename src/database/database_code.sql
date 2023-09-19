@@ -24,7 +24,7 @@ create table empleado(
 
 -- Funcion para actualizar el codigo del empleado con el 
 -- formato de EMP-XXXX
-CREATE OR REPLACE FUNCTION ActualizarCodigoEmpleado()
+CREATE OR REPLACE FUNCTION update_employee_code()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.id = 'EMP-' || LPAD(NEW.codigo::TEXT, 4, '0');
@@ -33,7 +33,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Trigger que se activa antes de insertar un dato de empleado
-CREATE TRIGGER TriggerActualizarCodigo
+CREATE TRIGGER update_code_trigger
 BEFORE INSERT ON empleado
 FOR EACH ROW
-EXECUTE FUNCTION ActualizarCodigoEmpleado();
+EXECUTE FUNCTION update_employee_code();

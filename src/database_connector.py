@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import os
 
 # Cargar informacion de la conexion a la base de datos
+# Mediante el archivo .env
 load_dotenv()
 
 # Clase para Conectar la Base de Datos
@@ -18,6 +19,7 @@ class DatabaseConnector():
 
     def __init__(self) -> None:
         # Conexion a la base de datos que contiene la informacion
+        # Mediante el uso de un archivo .env con la informacion
         self.database_connection = psycopg2.connect(
             database = os.getenv("DATABASE"),
             user = os.getenv("USER"),
