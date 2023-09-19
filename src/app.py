@@ -96,7 +96,7 @@ def list_registers():
 @app.route('/list_departments', methods=['GET'])
 def list_departments():
     # Se obtiene el resultado de la base de datos
-    result = database.get_departments()
+    result = database.get_departments_query()
 
     # Se comprueba que existan datos
     if(result):
@@ -112,7 +112,7 @@ def list_departments():
 @app.route('/list_employees', methods=['GET'])
 def list_employees():
     # Se obtiene el resultado de la base de datos
-    result = database.get_employees()
+    result = database.get_employees_query()
     # Se comprueba que existan datos
     if(result):
         message = None
@@ -192,13 +192,65 @@ def delete_register_employee():
 def update_register():
     return render_template('update_register.html')
 
-@app.route('/update_department')
+# Metodo para cargar la pagina actualizar departamento
+@app.route('/update_department', methods=['GET'])
 def update_department():
     return render_template('update_department.html')
 
-@app.route('/update_employee')
+# Metodo para realizar la accion de actualizar departamento
+@app.route('/update_register_department', methods=['POST'])
+def update_register_department():
+
+    # Se obtienen los datos por parte del form
+    department_id = request.form['code']
+    department_name = request.form['name']
+    department_description = request.form['description']
+
+    # Se ingresan los datos al query y se recibe el resultado
+    result = database.update_department_query(department_id, department_name, department_description)
+
+    # Si el resultado da error
+    if(result == "ERROR"):
+        # Se brinda un mensaje de error
+        flash(("Código de departamento no existe", 'danger'))
+    # De lo contrario
+    else:
+        # Se brinda un mensaje correcto
+        flash(("Departamento registrado exitosamente", 'success'))
+
+    # Se redirecciona a la pagina de creacion
+    return redirect(url_for('update_department'))
+
+# Metodo para cargar la pagina de actualizar empleado
+@app.route('/update_employee', methods=['GET'])
 def update_employee():
     return render_template('update_employee.html')
+
+# Metodo para realizar la accion de actualizar empleado
+@app.route('/update_register_employee', methods=['POST'])
+def update_register_employee():
+
+    # Se obtienen los datos por parte del form
+    employee_id = request.form['code']
+    employee_name = request.form['name']
+    employee_lastname = request.form['lastname']
+    employee_birthdate = request.form['dateOfBirth']
+    employee_department = request.form['department']
+
+    # Se ingresan los datos al query y se recibe el resultado
+    result = database.update_employee_query(employee_id, employee_name, employee_lastname, employee_birthdate, employee_department)
+
+    # Si el resultado da error
+    if(result == "ERROR"):
+        # Se brinda un mensaje de error
+        flash(("Código de empleado no existe", 'danger'))
+    # De lo contrario
+    else:
+        # Se brinda un mensaje correcto
+        flash(("Empleado actualizado exitosamente", 'success'))
+
+    # Se redirecciona a la pagina de creacion
+    return redirect(url_for('update_employee'))
 
 if __name__ == '__main__':
     app.run(debug=True)

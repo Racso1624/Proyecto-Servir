@@ -182,7 +182,7 @@ class DatabaseConnector():
         # Si el codigo del departamento existe se realiza la eliminacion
         if(self.get_department_code_query(department_code)):
             # Si el departamento no tiene empleados se elimina
-            if(not self.employees_in_department(department_code)):
+            if(not self.employees_in_department_query(department_code)):
 
                 # Se crea el cursor para realizar la consulta
                 database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -258,7 +258,7 @@ class DatabaseConnector():
             # Se ejecuta el query que se escribe dentro
             database_cursor.execute(
                 """
-                UPDATE departamento
+                UPDATE empleado
                 SET nombres = '{1}',
                     apellidos = '{2}',
                     fecha_nacimiento = '{3}',
