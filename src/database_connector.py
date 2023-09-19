@@ -151,23 +151,12 @@ class DatabaseConnector():
         if(self.get_department_code_query(department_code)):
             # Se crea el cursor para realizar la consulta
             database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            
-            # REVISAR EL FUNCIONAMIENTO DE ESTA PARTE
-            # Se obtiene el numero de empleados en la base de datos
-            employee_number = self.get_number_of_employees_query()[0] + 1
-            employee_id = "EMP-"
-
-            # Se crea el codigo a asignar del empleado
-            for i in range(4 - employee_number):
-                employee_id += "0"
-            
-            employee_id += str(employee_number)
 
             # Se ejecuta el query que se escribe dentro
             database_cursor.execute(
                 """
-                INSERT INTO empleado(id, nombres, apellidos, fecha_nacimiento, id_departamento) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}');
-                """.format(employee_id, name, lastname, birthdate, department_code) # Se brindan los valores necesarios para el query
+                INSERT INTO empleado(nombres, apellidos, fecha_nacimiento, id_departamento) VALUES ('{0}', '{1}', '{2}', '{3}');
+                """.format(name, lastname, birthdate, department_code) # Se brindan los valores necesarios para el query
             )
 
             # Se realiza el commit de la nueva informacion en la base de datos
