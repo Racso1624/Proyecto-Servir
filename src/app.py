@@ -5,7 +5,7 @@ Prueba Técnica
 '''
 
 # Importar librerias necesarias
-from flask import Flask, render_template, request, url_for, redirect, flash, session
+from flask import Flask, render_template, request, url_for, redirect, flash
 from database_connector import DatabaseConnector
 
 # Conectar la base de datos 

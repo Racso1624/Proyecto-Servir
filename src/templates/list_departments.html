@@ -3,10 +3,11 @@
 
 <head>
     <title>Listar Departamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body>
+<body class="body-color">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Sistema de Empleados</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -25,11 +26,11 @@
         </div>
     </nav>
     <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
-        <h1 class="font-weight-bold">Listado de Departamentos</h1>
+        <h1 class="font-weight-bold font-color">Listado de Departamentos</h1>
         {% if message %}
         <p class="h3 font-weight-bold">{{ message }}</p>
         {% else %}
-        <table class="table table-striped">
+        <table class="table table-striped bg-white">
             <thead>
                 <tr>
                     <th>Código de Departamento</th>

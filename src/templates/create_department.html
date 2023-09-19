@@ -3,10 +3,11 @@
 
 <head>
     <title>Crear Departamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body>
+<body class="body-color">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Sistema de Empleados</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -41,14 +42,14 @@
             {% endwith %}
         </div>
 
-        <h1 class="font-weight-bold">Creación de Departamentos</h1>
-        <p class="h5 font-weight-bold">Ingresa la siguiente información:</p>
+        <h1 class="font-weight-bold font-color">Creación de Departamentos</h1>
+        <p class="h5 font-weight-bold font-color">Ingresa la siguiente información:</p>
         <div class="container d-flex flex-column align-items-center">
 
             <form action="/register_department" method="post" autocomplete="off">
 
                 <div class="form-group">
-                    <label for="code" class="col-form-label">Codigo del Departamento</label>
+                    <label for="code" class="col-form-label font-color">Codigo del Departamento</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" name="code" id="code" placeholder="Ingrese el codigo"
@@ -57,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="col-form-label">Nombre del Departamento</label>
+                    <label for="name" class="col-form-label font-color">Nombre del Departamento</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el nombre"
@@ -66,7 +67,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description" class="cols-sm-2 control-label">Descripción</label>
+                    <label for="description" class="cols-sm-2 control-label font-color">Descripción</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>

@@ -3,10 +3,11 @@
 
 <head>
     <title>Actualizar Registros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body>
+<body class="body-color">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Sistema de Empleados</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -25,8 +26,8 @@
         </div>
     </nav>
     <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
-        <h1 class="font-weight-bold">Actualización de registros</h1>
-        <p class="h3 font-weight-bold">Tiene las siguientes opciones:</p>
+        <h1 class="font-weight-bold font-color">Actualización de registros</h1>
+        <p class="h3 font-weight-bold font-color">Tiene las siguientes opciones:</p>
         <div class="container d-flex flex-column align-items-center">
             <a class="btn btn-secondary mb-3" href="{{url_for('update_department')}}">Actualizar departamentos</a>
             <a class="btn btn-secondary mb-3" href="{{url_for('update_employee')}}">Actualizar empleados</a>
