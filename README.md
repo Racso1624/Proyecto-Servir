@@ -1,5 +1,12 @@
 # Proyecto-Servir
 
+### Descripción del Funcionamiento
+Esta Web App realiza tareas de un sistema de control para empleados de una empresa, esto mediante una conexión a la base de datos con la estructura definida para dos entidades: Departamento y Empleado. Mediante la app se pueden realizar distintas operaciones:
+- Crear Registros de Departamentos y Empleados
+- Listar Registros
+- Eliminar Registros
+- Actualizar Registros
+
 ### Características necesarias para utilizar la Web App:
 - Instalar flask: `pip install flask`
 - Instalar psycopg2: `pip install psycopg2`
