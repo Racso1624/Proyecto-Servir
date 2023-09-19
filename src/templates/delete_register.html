@@ -8,7 +8,7 @@
 </head>
 
 <body class="body-color">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-color">
         <a class="navbar-brand" href="/">Sistema de Empleados</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +27,10 @@
     </nav>
     <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
         <h1 class="font-weight-bold font-color">Eliminación de registros</h1>
-        <p class="h3 font-weight-bold font-color">Tiene las siguientes opciones:</p>
+        <p class="h3 font-weight-bold font-color mb-3">Tiene las siguientes opciones:</p>
         <div class="container d-flex flex-column align-items-center">
-            <a class="btn btn-secondary mb-3" href="{{url_for('delete_department')}}">Eliminar departamento</a>
-            <a class="btn btn-secondary mb-3" href="{{url_for('delete_employee')}}">Eliminar empleado</a>
+            <a class="btn btn-secondary custom-btn mb-3" href="{{url_for('delete_department')}}">Eliminar departamento</a>
+            <a class="btn btn-secondary custom-btn mb-3" href="{{url_for('delete_employee')}}">Eliminar empleado</a>
         </div>
     </div>
 </body>
