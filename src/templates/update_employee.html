@@ -24,12 +24,29 @@
             </ul>
         </div>
     </nav>
-    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
-        <h1 class="font-weight-bold">Actualización de Empleados</h1>
-        <p class="h5 font-weight-bold">Ingresa la siguiente información para actualizar:</p>
-        <div class="container d-flex flex-column align-items-center">
 
-            <form action="/update_register_employee" method="post" autocomplete="off">
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+
+        <div class="d-flex justify-content-center align-items-start">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message, category in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+        
+        <h1 class="font-weight-bold">Actualización de Empleados</h1>
+        <p class="h5 font-weight-bold">Actualización de la información personal:</p>
+        <div class="container d-flex flex-column align-items-center mb-5">
+
+            <form action="/update_register_employee_information" method="post" autocomplete="off">
 
                 <div class="form-group">
                     <label for="code" class="col-form-label">Ingresa el código del Empleado para Actualizar</label>
@@ -67,6 +84,26 @@
                     </div>
                 </div>
 
+                <div class="container d-flex justify-content-center align-items-center">
+                    <input type="submit" value="Actualizar información del empleado" class="btn btn-primary" name="">
+                </div>
+            </form>
+        </div>
+
+        <p class="h5 font-weight-bold">Actualización del departamento:</p>
+        <div class="container d-flex flex-column align-items-center">
+
+            <form action="/update_register_employee_department" method="post" autocomplete="off">
+
+                <div class="form-group">
+                    <label for="code" class="col-form-label">Ingresa el código del Empleado para Actualizar</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="code" id="code" placeholder="Ingrese el codigo"
+                            required>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="department" class="cols-sm-2 control-label">Departamento</label>
                     <div class="cols-sm-10">
@@ -78,23 +115,8 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center align-items-start">
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                    {% for message, category in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-                </div>
-
                 <div class="container d-flex justify-content-center align-items-center">
-                    <input type="submit" value="Registrar empleado" class="btn btn-primary" name="">
+                    <input type="submit" value="Actualizar departamento del empleado" class="btn btn-primary" name="">
                 </div>
 
             </form>

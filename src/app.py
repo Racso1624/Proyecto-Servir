@@ -216,7 +216,7 @@ def update_register_department():
     # De lo contrario
     else:
         # Se brinda un mensaje correcto
-        flash(("Departamento registrado exitosamente", 'success'))
+        flash(("Departamento actualizado exitosamente", 'success'))
 
     # Se redirecciona a la pagina de creacion
     return redirect(url_for('update_department'))
@@ -226,19 +226,18 @@ def update_register_department():
 def update_employee():
     return render_template('update_employee.html')
 
-# Metodo para realizar la accion de actualizar empleado
-@app.route('/update_register_employee', methods=['POST'])
-def update_register_employee():
+# Metodo para realizar la accion de actualizar la informacion del empleado
+@app.route('/update_register_employee_information', methods=['POST'])
+def update_register_employee_information():
 
     # Se obtienen los datos por parte del form
     employee_id = request.form['code']
     employee_name = request.form['name']
     employee_lastname = request.form['lastname']
     employee_birthdate = request.form['dateOfBirth']
-    employee_department = request.form['department']
 
     # Se ingresan los datos al query y se recibe el resultado
-    result = database.update_employee_query(employee_id, employee_name, employee_lastname, employee_birthdate, employee_department)
+    result = database.update_employee_information_query(employee_id, employee_name, employee_lastname, employee_birthdate)
 
     # Si el resultado da error
     if(result == "ERROR"):
@@ -252,5 +251,32 @@ def update_register_employee():
     # Se redirecciona a la pagina de creacion
     return redirect(url_for('update_employee'))
 
+# Metodo para realizar la accion de actualizar el departamento
+@app.route('/update_register_employee_department', methods=['POST'])
+def update_register_employee_department():
+
+    # Se obtienen los datos por parte del form
+    employee_id = request.form['code']
+    employee_department = request.form['department']
+
+    # Se ingresan los datos al query y se recibe el resultado
+    result = database.update_employee_department_query(employee_id, employee_department)
+
+    # Si el resultado da error
+    if(result == "ERROR"):
+        # Se brinda un mensaje de error
+        flash(("Código de empleado no existe", 'danger'))
+    # Si el departamento que se desea asignar no existe
+    elif(result == "DEPARTAMENTO"):
+        flash(("Código de departamento no existe", 'danger'))
+    # De lo contrario
+    else:
+        # Se brinda un mensaje correcto
+        flash(("Empleado actualizado exitosamente", 'success'))
+
+    # Se redirecciona a la pagina de creacion
+    return redirect(url_for('update_employee'))
+
+# Se ejecuta la WebApp
 if __name__ == '__main__':
     app.run(debug=True)

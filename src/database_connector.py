@@ -223,7 +223,8 @@ class DatabaseConnector():
         # Si el codigo no existe se devuelve error
         else:
             return "ERROR"
-        
+    
+    # Funcion para actualizar un departamento
     def update_department_query(self, department_id, name, description):
 
         # Si el codigo del departamento existe, entonces se actualiza
@@ -247,8 +248,8 @@ class DatabaseConnector():
         else:
             return "ERROR"
         
-    # Funcion para eliminar el empleado
-    def update_employee_query(self, employee_id, name, lastname, birthdate, department_code):
+    # Funcion para actualizar la informacion del empleado
+    def update_employee_information_query(self, employee_id, name, lastname, birthdate):
 
         # Si el codigo del empleado existe se actualiza el empleado
         if(self.get_employee_code_query(employee_id)):
@@ -261,14 +262,39 @@ class DatabaseConnector():
                 UPDATE empleado
                 SET nombres = '{1}',
                     apellidos = '{2}',
-                    fecha_nacimiento = '{3}',
-                    id_departamento = '{4}'
+                    fecha_nacimiento = '{3}'
                 WHERE id = '{0}';
-                """.format(employee_id, name, lastname, birthdate, department_code) # Se brindan los valores necesarios para el query
+                """.format(employee_id, name, lastname, birthdate) # Se brindan los valores necesarios para el query
             )
 
             # Se realiza el commit de la nueva informacion en la base de datos
             self.database_connection.commit()
+        # Si el codigo no existe se devuelve error
+        else:
+            return "ERROR"
+        
+    # Funcion para actualizar el departamento del empleado
+    def update_employee_department_query(self, employee_id, department_code):
+
+        # Si el codigo del empleado existe se actualiza el empleado
+        if(self.get_employee_code_query(employee_id)):
+            if(self.get_department_code_query(department_code)):
+                # Se crea el cursor para realizar la consulta
+                database_cursor = self.database_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+                # Se ejecuta el query que se escribe dentro
+                database_cursor.execute(
+                    """
+                    UPDATE empleado
+                    SET id_departamento = '{1}'
+                    WHERE id = '{0}';
+                    """.format(employee_id, department_code) # Se brindan los valores necesarios para el query
+                )
+
+                # Se realiza el commit de la nueva informacion en la base de datos
+                self.database_connection.commit()
+            else:
+                return "DEPARTAMENTO"
         # Si el codigo no existe se devuelve error
         else:
             return "ERROR"
